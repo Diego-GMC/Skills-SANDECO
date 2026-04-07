@@ -8,6 +8,7 @@
 !.agent/skills/chat-csv-autos/SKILL.md
 !.agent/skills/chat-csv-autos/scripts/query_csv.py
 !.agent/skills/chat-csv-autos/scripts/test_query.py
+!.agent/skills/plot-bar-chart/**
 
 # Permitir documentação e configs raiz
 !README.md

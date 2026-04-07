@@ -41,7 +41,7 @@ Campos suportados: `assunto_completo`, `nr_objeto_tramitacao`, e `area_atuacao`.
 
 5. **Interprete e Formate o Sucesso ou Erro:**
    O script Python retornará APENAS um Log JSON limpo.
-   - Se `ok: true`, pegue o resultado e formule uma frase amigável com a resposta.
+   - Se `ok: true`, pegue o resultado e formule uma frase amigável com a resposta. Além disso, se o retorno contiver dados sumarizados, proponha no final se o usuário quer ver isso projetado em um gráfico de barras (usando a skill plot-bar-chart).
    - Se `ok: false`, um `error_type` estará presente (ex: `AMBIGUOUS_FILTER`, `TOO_BROAD`, `UNSUPPORTED_FIELD`, `IO_ERROR`, `NO_MATCH`). Formate o erro de forma clara sem falar termos técnicos difíceis para o usuário.
 
 6. **Cleaning Up:**
