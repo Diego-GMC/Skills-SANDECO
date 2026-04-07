@@ -1,0 +1,13 @@
+# Ignorar tudo
+*
+
+# Permitir varredura nos diretórios
+!*/
+
+# Permitir explicitamente os arquivos da skill
+!.agent/skills/chat-csv-autos/SKILL.md
+!.agent/skills/chat-csv-autos/scripts/query_csv.py
+!.agent/skills/chat-csv-autos/scripts/test_query.py
+
+# Permitir o próprio gitignore
+!.gitignore
