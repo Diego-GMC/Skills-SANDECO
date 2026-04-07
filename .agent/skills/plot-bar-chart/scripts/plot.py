@@ -21,6 +21,19 @@ def main():
     if len(labels) != len(values):
         print(json.dumps({"ok": False, "error": "Labels and values must have the same length."}))
         sys.exit(1)
+
+    # Conversão de segurança para numérico
+    try:
+        values = [float(v) for v in values]
+    except Exception as e:
+        print(json.dumps({"ok": False, "error": f"Values must be numeric: {str(e)}"}))
+        sys.exit(1)
+
+    # Limitar a no máximo 8 barras (7 normais + 1 'Outros')
+    if len(labels) > 8:
+        outros_val = sum(values[7:])
+        labels = labels[:7] + ["Outros"]
+        values = values[:7] + [outros_val]
         
     plt.figure(figsize=(10, 6))
     bars = plt.bar(labels, values, color='#4A90E2')
