@@ -41,7 +41,7 @@ def main():
     # Add values on top of bars
     for bar in bars:
         yval = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width() / 2, yval, int(yval), valignment='bottom', ha='center')
+        plt.text(bar.get_x() + bar.get_width() / 2, yval, int(yval), va='bottom', ha='center')
         
     plt.title(title, fontsize=14, pad=20)
     plt.xlabel(data.get("xlabel", "Categorias"), fontsize=12)
