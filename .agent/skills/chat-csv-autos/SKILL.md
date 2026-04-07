@@ -15,8 +15,8 @@ Campos suportados: `assunto_completo`, `nr_objeto_tramitacao`, e `area_atuacao`.
 
 1. **Analise a Pergunta:** Determine a ação desejada:
    - `COUNT`: Contar quantidade de registros baseados em filtros.
-   - `LIST` / `DISTINCT`: Listar ou extrair registros únicos baseados em filtros.
-   - `FREQ`: Agrupamento simplificado restrito a um ÚNICO campo por vez (`assunto_completo` ou `area_atuacao`). Retorna no máximo o Top 10 itens para rankings.
+   - `LIST` / `DISTINCT`: Listar ou extrair registros únicos baseados em filtros (padrão: 50 itens; ajuste usando 'limit').
+   - `FREQ`: Agrupamento simplificado restrito a um ÚNICO campo por vez (`assunto_completo` ou `area_atuacao`). Retorna rankings (padrão: Top 10 itens; ajuste usando 'limit').
 
 2. **Gere o Payload JSON:** Monte o payload respeitando o contrato abaixo. `filters` é **sempre um dicionário** `{"campo": "valor"}`, NUNCA uma lista de objetos.
 
@@ -24,11 +24,11 @@ Campos suportados: `assunto_completo`, `nr_objeto_tramitacao`, e `area_atuacao`.
    // COUNT
    { "action": "COUNT", "filters": { "assunto_completo": "<valor>" } }
 
-   // LIST ou DISTINCT (retorna até 50 registros)
-   { "action": "LIST", "filters": { "area_atuacao": "<valor>" } }
+   // LIST ou DISTINCT
+   { "action": "LIST", "filters": { "area_atuacao": "<valor>" }, "limit": 100 }
 
    // FREQ — sem filters; usa "target" para indicar o campo de agrupamento
-   { "action": "FREQ", "filters": {}, "target": "assunto_completo" }
+   { "action": "FREQ", "filters": {}, "target": "assunto_completo", "limit": 20 }
    ```
    Campos válidos em `filters` e `target`: `assunto_completo`, `nr_objeto_tramitacao`, `area_atuacao`.
    `filters` pode ser `{}` quando não há filtro (ex.: FREQ global).

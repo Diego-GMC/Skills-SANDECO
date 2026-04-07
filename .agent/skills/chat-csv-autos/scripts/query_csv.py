@@ -53,6 +53,7 @@ def main():
     action = payload.get("action")
     filters = payload.get("filters", {})
     target = payload.get("target")
+    limit = payload.get("limit")
 
     # Normalise filters: accept both dict {field: value} and list [{field, value, ...}]
     if isinstance(filters, list):
@@ -111,7 +112,7 @@ def main():
         return_output({"ok": True, "action": "COUNT", "count": int(distinct_count), "total_rows": int(len(filtered_df))})
     
     elif action in ["LIST", "DISTINCT"]:
-        max_return = 50
+        max_return = int(limit) if limit is not None else 50
         if action == "DISTINCT":
             res = filtered_df.drop_duplicates()
         else:
@@ -127,10 +128,12 @@ def main():
         # Must keep dropna=False for nulos mapping
         full_freq = filtered_df[target].value_counts(dropna=False)
         total_unique_groups = len(full_freq)
-        freq_top10 = full_freq.head(10)
+        
+        max_freq = int(limit) if limit is not None else 10
+        freq_top = full_freq.head(max_freq)
         
         data_out = []
-        for val, count in freq_top10.items():
+        for val, count in freq_top.items():
             val_str = str(val) if not pd.isna(val) else "Nulo/Vazio"
             data_out.append({"value": val_str, "count": int(count)})
             
