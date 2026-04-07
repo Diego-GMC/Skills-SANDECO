@@ -19,6 +19,7 @@ Campos suportados: `assunto_completo`, `nr_objeto_tramitacao`, e `area_atuacao`.
    - `FREQ`: Agrupamento simplificado restrito a um ÚNICO campo por vez (`assunto_completo` ou `area_atuacao`). Retorna rankings (padrão: Top 10 itens; ajuste usando 'limit').
 
 2. **Gere o Payload JSON:** Monte o payload respeitando o contrato abaixo. `filters` é **sempre um dicionário** `{"campo": "valor"}`, NUNCA uma lista de objetos.
+   *Dica de Filtro:* Se o usuário perguntar por processos "sem classificação", "nulos" ou "vazios", envie "nulo", "vazio" ou "null" como valor do filtro. O script do Pandas fará o bypass automático para coletar registros `NaN`.
 
    ```json
    // COUNT

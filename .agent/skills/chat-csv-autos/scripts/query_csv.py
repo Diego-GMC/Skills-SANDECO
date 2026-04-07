@@ -82,6 +82,15 @@ def main():
             return_output({"ok": False, "error_type": "UNSUPPORTED_FIELD", "message": f"Unsupported field: {col}"})
         
         term_norm = normalize_term(str(term))
+
+        # 1. Checagem especial: Filtro para itens nulos/vazios
+        if term_norm in ["nulo", "vazio", "nan", "null", "none", ""]:
+            nulo_mask = df[col].isna() | (df[col].astype(str).str.strip() == "") | (df[col].astype(str) == "nan")
+            if nulo_mask.sum() == 0:
+                return_output({"ok": False, "error_type": "NO_MATCH", "message": f"No null matches found in {col}."})
+            mask = mask & nulo_mask
+            continue
+
         col_norm = normalize_text(df[col].astype(str))
         safe_regex = re.escape(term_norm)
         
