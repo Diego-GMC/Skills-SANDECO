@@ -17,6 +17,28 @@ A skill assume que existe uma base de dados local na raiz do projeto (como `base
 
 Para rodar essa skill, certifique-se de instalar as dependências de Python listadas no `requirements.txt`.
 
+### 2. `plot-bar-chart`
+Gera e exibe na tela do usuário um **gráfico de barras interativo** a partir de dados sumarizados. É normalmente utilizada em conjunto com a skill `chat-csv-autos`: primeiro o agente consulta a base e consolida os números; depois a skill `plot-bar-chart` renderiza o resultado visualmente.
+
+**Principais características:**
+- Recebe um payload JSON com `labels` (rótulos) e `values` (valores numéricos) de mesmo tamanho.
+- Consolida automaticamente categorias excedentes: quando há mais de 8 categorias, as excedentes são agrupadas sob o rótulo **"Outros"**.
+- Exibe os valores numéricos sobre cada barra para leitura rápida.
+- Abre uma janela interativa do Matplotlib diretamente na tela do usuário.
+
+**Exemplo de payload:**
+```json
+{
+  "title": "Top 10 Assuntos",
+  "labels": ["Assunto A", "Assunto B", "Assunto C"],
+  "values": [35, 12, 10],
+  "xlabel": "Assuntos",
+  "ylabel": "Quantidade"
+}
+```
+
+**Dependência adicional:** `matplotlib` (já listada no `requirements.txt`).
+
 ---
 
 ## 🚀 Instalação (Uso Local)
